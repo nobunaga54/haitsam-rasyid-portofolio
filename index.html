@@ -64,7 +64,7 @@
     border:3px solid var(--brass);
     box-shadow:0 20px 40px -12px rgba(0,0,0,.5);
   }
-  .hero-photo img{width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block;}
+  .hero-photo img{width:100%; height:100%; object-fit:cover; object-position:center 20%; display:block; cursor:zoom-in;}
   @media(max-width:640px){
     .hero-top{flex-direction:column-reverse; align-items:flex-start;}
     .hero-photo{width:120px; height:120px;}
@@ -96,13 +96,13 @@
     box-shadow:0 30px 60px -20px rgba(0,0,0,.5);
   }
   .stamp{
-    position:absolute; top:-18px; right:34px;
+    position:absolute; top:-18px; left:50%;
+    transform:translateX(-50%) rotate(-9deg);
     width:112px; height:112px;
     border:2.5px solid var(--rust);
     border-radius:50%;
     display:flex; align-items:center; justify-content:center;
     text-align:center;
-    transform:rotate(-9deg);
     color:var(--rust);
     font-family:'IBM Plex Mono',monospace;
     font-size:.62rem; letter-spacing:.06em; text-transform:uppercase;
@@ -167,13 +167,59 @@
     font-family:'Fraunces',serif; font-size:.95rem; color:rgba(242,239,231,0.55);
     background:linear-gradient(135deg,var(--ink-3),var(--ink-2));
     border-bottom:1px solid var(--rule);
+    position:relative; overflow:hidden;
   }
+  .g-thumb img{cursor:zoom-in;}
   .g-body{padding:18px 20px 20px;}
   .g-body h4{font-size:1rem; font-weight:600; margin-bottom:6px;}
   .g-body p{margin:0; font-size:.85rem; color:var(--text-lo); line-height:1.5;}
   .g-body .tag{
     display:inline-block; margin-top:12px; font-family:'IBM Plex Mono',monospace;
     font-size:.68rem; color:var(--teal); letter-spacing:.05em; text-transform:uppercase;
+  }
+
+  /* ---------- SLIDESHOW (Blog Content card) ---------- */
+  .slideshow img{
+    position:absolute; top:0; left:0;
+    width:100%; height:100%; object-fit:cover;
+    opacity:0; transition:opacity .6s ease;
+  }
+  .slideshow img.active{opacity:1;}
+  .slide-dots{
+    position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
+    display:flex; gap:6px; z-index:2;
+  }
+  .slide-dots button{
+    width:7px; height:7px; border-radius:50%; border:none;
+    background:rgba(242,239,231,0.4); cursor:pointer; padding:0;
+  }
+  .slide-dots button.active{background:var(--brass);}
+  .slide-arrow{
+    position:absolute; top:50%; transform:translateY(-50%);
+    background:rgba(20,24,28,0.55); color:var(--text-hi); border:none;
+    width:26px; height:26px; border-radius:50%; cursor:pointer; z-index:2;
+    display:flex; align-items:center; justify-content:center; font-size:.8rem;
+  }
+  .slide-arrow.prev{left:8px;} .slide-arrow.next{right:8px;}
+
+  /* ---------- LIGHTBOX ---------- */
+  .lightbox{
+    position:fixed; inset:0; z-index:100;
+    background:rgba(10,12,14,0.92);
+    display:none; align-items:center; justify-content:center;
+    padding:40px; cursor:zoom-out;
+  }
+  .lightbox.open{display:flex;}
+  .lightbox img{
+    max-width:90vw; max-height:90vh;
+    object-fit:contain;
+    box-shadow:0 30px 80px rgba(0,0,0,.6);
+    border-radius:2px;
+  }
+  .lightbox-close{
+    position:absolute; top:24px; right:32px;
+    color:var(--text-hi); font-size:2rem; background:none; border:none;
+    cursor:pointer; line-height:1;
   }
 
   /* ---------- ALSO BUILDING ---------- */
@@ -216,7 +262,7 @@
   }
   @media(max-width:560px){
     .gallery{grid-template-columns:1fr;}
-    .stamp{width:92px; height:92px; font-size:.56rem; right:16px; top:-14px;}
+    .stamp{width:92px; height:92px; font-size:.56rem; top:-14px;}
   }
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
@@ -250,7 +296,8 @@
     </div>
   </div>
 
-  <div class="statement reveal" id="statement"> 
+  <div class="statement reveal" id="statement">
+    <div class="stamp">On file<br>since 2017</div>
     <div class="statement-head">
       <span class="label">Profile Summary — Account Overview</span>
       <span class="label mono">EN · DE · ID</span>
@@ -342,12 +389,20 @@
 
 <section id="work">
   <div class="section-tag"><span>Design Work</span><div class="ln"></div></div>
-  <h2 class="section-title">Brand and marketing visuals, made on the side</h2>
+  <h2 class="section-title">Creative work and hands-on projects, made on the side</h2>
 
   <div class="gallery">
     <div class="g-card reveal">
-      <div class="g-thumb">
-        <img src="Neukundengewinnung.png" alt="Blog Content Design" style="width:100%; height:100%; object-fit:cover;">
+      <div class="g-thumb slideshow" data-slideshow>
+        <img src="Blog-1.png" class="active" alt="Blog content 1">
+        <img src="Blog-2.png" class="active" alt="Blog content 2">
+        <img src="Blog-3.png" class="active" alt="Blog content 3">
+        <img src="Blog-4.png" class="active" alt="Blog content 4">
+        <img src="Blog-5.png" class="active" alt="Blog content 5">
+        <img src="Blog-6.png" class="active" alt="Blog content 6">
+        <button class="slide-arrow prev" aria-label="Previous">‹</button>
+        <button class="slide-arrow next" aria-label="Next">›</button>
+        <div class="slide-dots"></div>
       </div>
       <div class="g-body">
         <h4>Blog Content</h4>
@@ -357,7 +412,7 @@
     </div>
     <div class="g-card reveal">
       <div class="g-thumb">
-        <img src="ETS-Front.png" alt="Business card design" style="width:100%; height:100%; object-fit:cover;">
+        <img src="BC-1.png" alt="Business card design" style="width:100%; height:100%; object-fit:cover;">
       </div>
       <div class="g-body">
         <h4>Business Card Set</h4>
@@ -365,6 +420,21 @@
         <span class="tag">Branding</span>
       </div>
     </div>
+    <div class="g-card reveal">
+      <div class="g-thumb slideshow" data-slideshow>
+        <img src="Drawing-1.png" class="active" alt="Drawing 1">
+        <img src="Drawing-2.png" class="active" alt="Drawing 2">
+        <img src="Drawing-3.png" class="active" alt="Drawing 3">
+        <button class="slide-arrow prev" aria-label="Previous">‹</button>
+        <button class="slide-arrow next" aria-label="Next">›</button>
+        <div class="slide-dots"></div>
+      </div>
+      <div class="g-body">
+        <h4>Tiger Illustration Series</h4>
+        <p>Original digital paintings designed for print-on-demand use — mugs, NFC cards, and similar merchandise. Bold color blocking and loose brushwork built to hold up at small scale.</p>
+        <span class="tag">Branding</span>
+      </div>
+    </div> 
     <div class="g-card reveal">
       <div class="g-thumb">
         <img src="General Catalogue Draft_1_page-0001.jpg" alt="Brochure layout design" style="width:100%; height:100%; object-fit:cover;">
@@ -375,6 +445,22 @@
         <span class="tag">Print</span>
       </div>
     </div>
+     <div class="g-card reveal">
+      <div class="g-thumb slideshow" data-slideshow>
+        <img src="EF-1.png" class="active" alt="EF 1">
+        <img src="EF-2.png" class="active" alt="EF 2">
+        <img src="EF-3.png" class="active" alt="EF 3">
+        <img src="EF-4.png" class="active" alt="EF 4">
+        <button class="slide-arrow prev" aria-label="Previous">‹</button>
+        <button class="slide-arrow next" aria-label="Next">›</button>
+        <div class="slide-dots"></div>
+      </div>
+      <div class="g-body">
+        <h4>EF Ambassador Program/h4>
+        <p>Education First, Jakarta. Represented EF as a brand ambassador across a season of community events — team outings, a paintball day, and the year-end Christmas gathering — building camaraderie and brand presence among fellow ambassadors.</p>
+        <span class="tag">Branding</span>
+      </div>
+    </div> 
     <div class="g-card reveal">
       <div class="g-thumb">
         <video controls style="width:100%; height:100%; object-fit:cover;">
@@ -424,12 +510,72 @@
 
 <footer>© 2026 Haitsam Rasyid — Jakarta</footer>
 
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" aria-label="Close">×</button>
+  <img src="" alt="" id="lightbox-img">
+</div>
+
 <script>
   const items = document.querySelectorAll('.reveal');
   const io = new IntersectionObserver((entries)=>{
     entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
   }, {threshold:.15});
   items.forEach(i=>io.observe(i));
+
+  // Slideshow logic
+  document.querySelectorAll('[data-slideshow]').forEach(box => {
+    const imgs = box.querySelectorAll('img');
+    const dotsWrap = box.querySelector('.slide-dots');
+    let current = 0;
+
+    imgs.forEach((_, i) => {
+      const dot = document.createElement('button');
+      if(i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = dotsWrap.querySelectorAll('button');
+
+    function goTo(index){
+      imgs[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (index + imgs.length) % imgs.length;
+      imgs[current].classList.add('active');
+      dots[current].classList.add('active');
+    }
+
+    const prevBtn = box.querySelector('.prev');
+    const nextBtn = box.querySelector('.next');
+    if(prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+    if(nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
+
+    if(imgs.length > 1){
+      setInterval(() => goTo(current + 1), 4000);
+    }
+  });
+
+  // Lightbox logic
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  document.querySelectorAll('.g-thumb img, .hero-photo img').forEach(img => {
+    img.addEventListener('click', () => {
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightbox.classList.add('open');
+    });
+  });
+
+  function closeLightbox(){ lightbox.classList.remove('open'); }
+
+  lightbox.addEventListener('click', closeLightbox);
+  document.querySelector('.lightbox-close').addEventListener('click', e => {
+    e.stopPropagation();
+    closeLightbox();
+  });
+  document.addEventListener('keydown', e => {
+    if(e.key === 'Escape') closeLightbox();
+  });
 </script>
 
 </body>
