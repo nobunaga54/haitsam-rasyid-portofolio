@@ -386,7 +386,30 @@
       </div>
     </div>
 
+       <div class="ledger-row reveal">
+      <div class="date mono">2018</div>
+      <div>
+        <h3>Junior Graphic Designer (Intern)</h3>
+        <p>Qomparo24, GmbH, Hagen. Designed marketing and promotional assets for digital campaigns, created the intro video for the company's podcast — concept, design, and animation — and contributed to brand consistency across digital materials.</p>
+      </div>
+      <div class="tags">
+        <span>GRAPHIC DESIGN</span>
+        <span>MOTION / VIDEO</span>
+      </div>
+    </div>
+
     <div class="ledger-row reveal">
+      <div class="date mono">2017</div>
+      <div>
+        <h3>Social Media Marketing Intern</h3>
+        <p>Education First (EF), Jakarta. Managed social media channels and drove alumni engagement through regular content, planned and organized alumni events end to end, and supported broader digital marketing campaigns.</p>
+      </div>
+      <div class="tags">
+        <span>SOCIAL MEDIA</span>
+        <span>EVENT SUPPORT</span>
+      </div>
+      
+     <div class="ledger-row reveal">
       <div class="date mono">Ed.</div>
       <div>
         <h3>Fachhochschule Südwestfalen &amp; Swiss German University</h3>
@@ -415,7 +438,7 @@
 
   <div class="gallery">
     <div class="g-card reveal">
-      <div class="g-thumb slideshow" data-slideshow>
+      <div class="g-thumb slideshow" data-slideshow data-manual="true">
         <img src="Blog-1.png" class="active" alt="Blog content 1">
         <img src="Blog-2.png" class="active" alt="Blog content 2">
         <img src="Blog-3.png" class="active" alt="Blog content 3">
@@ -443,7 +466,7 @@
       </div>
     </div>
     <div class="g-card reveal">
-      <div class="g-thumb slideshow" data-slideshow>
+      <div class="g-thumb slideshow" data-slideshow data-manual="true">
         <img src="Drawing-1.jpg" class="active" alt="Tiger Illustration Series 1">
         <img src="Drawing-2.jpg" class="active" alt="Tiger Illustration Series 2">
         <img src="Drawing-3.png" class="active" alt="Tiger Illustration Series 3">
@@ -454,7 +477,7 @@
       <div class="g-body">
         <h4>Tiger Illustration Series</h4>
         <p>Original digital paintings designed for print-on-demand use — mugs, NFC cards, and similar merchandise. Bold color blocking and loose brushwork built to hold up at small scale.</p>
-        <span class="tag">Branding</span>
+        <span class="tag">Illustration</span>
       </div>
     </div> 
     <div class="g-card reveal">
@@ -468,7 +491,7 @@
       </div>
     </div>
      <div class="g-card reveal">
-      <div class="g-thumb slideshow" data-slideshow>
+      <div class="g-thumb slideshow" data-slideshow data-manual="true">
         <img src="EF-1.JPG" class="active" alt="EF Ambassador Program 1">
         <img src="EF-2.JPG" class="active" alt="EF Ambassador Program 2">
         <img src="EF-3.JPG" class="active" alt="EF Ambassador Program 3">
@@ -480,7 +503,7 @@
       <div class="g-body">
         <h4>EF Ambassador Program</h4>
         <p>Education First, Jakarta. Represented EF as a brand ambassador across a season of community events — team outings, a paintball day, and the year-end Christmas gathering — building camaraderie and brand presence among fellow ambassadors.</p>
-        <span class="tag">Branding</span>
+        <span class="tag">Event Production</span>
       </div>
     </div> 
     <div class="g-card reveal">
@@ -516,6 +539,37 @@
       <p>Writing product descriptions, marketing copy, and social captions for small businesses and personal brands — turning a feature or a story into something people actually want to read.</p>
     </div>
   </div>
+    <div class="g-card reveal">
+      <div class="g-thumb slideshow" data-manual="true">
+        <img src="Prom-1.jpg" class="active" alt="Prom night photo 1">
+        <img src="Prom-2.jpg" class="active" alt="Prom night photo 2">
+        <img src="Prom-3.jpg" class="active" alt="Prom night photo 3">
+        <img src="Prom-4.jpg" class="active" alt="Prom night photo 4">
+        <button class="slide-arrow prev" aria-label="Previous">‹</button>
+        <button class="slide-arrow next" aria-label="Next">›</button>
+        <div class="slide-dots"></div>
+      </div>
+      <div class="g-body">
+        <h4>Prom Night — Photos</h4>
+        <p>Jakarta. Photo documentation for SMA 72's prom night, captured during my time as Project Leader at an event organizer.</p>
+        <span class="tag">Event Documentation</span>
+      </div>
+    </div>
+
+    <div class="g-card reveal">
+      <div class="g-thumb">
+        <video controls style="width:100%; height:100%; object-fit:cover;">
+          <source src="Prom-Vid.mp4" type="video/mp4">
+        </video>
+      </div>
+      <div class="g-body">
+        <h4>Prom Night — Video</h4>
+        <p>Video documentation of SMA 72's prom night, produced alongside the photo set above.</p>
+        <span class="tag">Event Documentation</span>
+      </div>
+    </div>
+  </div>
+  
 </section>
 
 <section id="contact">
@@ -573,7 +627,7 @@
     if(prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
     if(nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
 
-    if(imgs.length > 1){
+    if(imgs.length > 1 && box.dataset.manual !== 'true'){
       setInterval(() => goTo(current + 1), 4000);
     }
   });
